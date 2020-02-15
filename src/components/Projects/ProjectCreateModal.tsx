@@ -1,5 +1,5 @@
 import React from "react"
-import {CloseButton} from "./CloseButton";
+import {CloseButton} from "../CloseButton";
 import {ProjectCreateModalForm} from "./ProjectCreateModalForm";
 
 export const ProjectCreateModal = (props:{onClose: any}) => {

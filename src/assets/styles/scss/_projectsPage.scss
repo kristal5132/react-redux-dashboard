@@ -121,7 +121,7 @@
 }
 
 .project-text:nth-child(7) {
-  max-width: 240px;
+  max-width: 150px;
   width: 100%;
   position: relative;
   z-index:1;
@@ -139,7 +139,6 @@
 }
 
 .project-text:nth-child(7) h2 {
-  max-width: 250px;
   width:100%;
   display: block;
 }
@@ -174,5 +173,18 @@
 
 .project-progress progress[value="100"]::-webkit-progress-value {
   background-color: #4caf50;
+}
+
+.project-options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.project-options__dots {
+  height: 16px;
+  width: 4px;
+  background: url("../../images/dots.png") no-repeat center center;
+  border: none;
+  cursor: pointer;
 }
 

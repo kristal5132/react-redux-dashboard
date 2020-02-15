@@ -1,5 +1,8 @@
 import React, {FormEvent, useState, useContext} from "react"
-import {Context} from "./Context";
+import {Context} from "../Context";
+const axios = require('axios');
+axios.defaults.headers.post['Content-Type'] = 'application/json';
+
 
 export const ProjectCreateModalForm = () => {
     const {addProject} = useContext(Context);
@@ -12,27 +15,24 @@ export const ProjectCreateModalForm = () => {
     function onSubmit(e:FormEvent<HTMLFormElement>) {
         e.preventDefault();
         const sendData = async () => {
-            let myHeaders = new Headers();
-            myHeaders.append("x-access-token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTE5YzIyM2E0MTk5YzAwMjI3NTI2OGEiLCJpYXQiOjE1Nzk2ODc4OTl9.M5q83O_nP6B8SbfNKOs3CaQTu4JaQcbr_MgDLSgqnTU");
-            myHeaders.append("Content-Type", "application/json");
 
-            let raw = JSON.stringify({
+            let data = {
                 "title": title,
                 "company": company,
                 "cost": cost,
                 "deadline": deadline,
                 "assigned": assigned
-            });
+            };
 
             let requestOptions: RequestInit = {
-                method: 'POST',
-                headers: myHeaders,
-                body: raw,
+                headers: {
+                    "x-access-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTE5YzIyM2E0MTk5YzAwMjI3NTI2OGEiLCJpYXQiOjE1Nzk2ODc4OTl9.M5q83O_nP6B8SbfNKOs3CaQTu4JaQcbr_MgDLSgqnTU"
+                },
                 redirect: 'follow'
             };
-            const response = await fetch("https://geekhub-frontend-js-9.herokuapp.com/api/projects/", requestOptions);
-            const result = await response.json();
-            console.log(result);
+            const response = await axios.post('/api/projects/', data, requestOptions);
+            const result = response.data;
+            console.log(response);
 
             addProject(result);
         };

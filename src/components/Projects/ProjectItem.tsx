@@ -1,6 +1,7 @@
 import React from "react"
 import {ProjectItemText} from "./ProjectItemText";
 import {ProjectItemProgressBar} from "./ProjectItemProgressBar";
+import {ProjectItemOptions} from "./ProjectItemOptions";
 
 export const ProjectItem = (props:any) => {
     let months:string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',	'November', 'December'];
@@ -20,7 +21,9 @@ export const ProjectItem = (props:any) => {
     } else cost = props.obj.cost;
 
     return (
-        <div className="project-container">
+        <div className="project-container" onClick={() => {
+            console.log(props.obj._id)
+        }}>
                 <ProjectItemText title={props.obj.title} subtitle={props.obj.company}/>
                 <ProjectItemText title={cost}/>
                 <ProjectItemText title={newDate} subtitle={`${daysToDeadline} days left`}/>
@@ -33,6 +36,7 @@ export const ProjectItem = (props:any) => {
                 {props.obj.assigned !== null &&
                     <ProjectItemText title={props.obj.assigned.name} subtitle={props.obj.assigned.position}/>
                 }
+                <ProjectItemOptions/>
         </div>
     )
 };
