@@ -1,11 +1,13 @@
-import React, {FormEvent, useState, useContext} from "react"
-import {Context} from "../Context";
+import React, {FormEvent, useState} from "react"
+import {useDispatch} from "react-redux";
+import {addProject} from "../../store/projects/actions";
 const axios = require('axios');
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 
 export const ProjectCreateModalForm = () => {
-    const {addProject} = useContext(Context);
+    const dispatch = useDispatch();
+
     const [title, setTitle] = useState("");
     const [company, setCompany] = useState("");
     const [cost, setCost] = useState("");
@@ -26,7 +28,7 @@ export const ProjectCreateModalForm = () => {
 
             let requestOptions: RequestInit = {
                 headers: {
-                    "x-access-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTE5YzIyM2E0MTk5YzAwMjI3NTI2OGEiLCJpYXQiOjE1Nzk2ODc4OTl9.M5q83O_nP6B8SbfNKOs3CaQTu4JaQcbr_MgDLSgqnTU"
+                    "x-access-token": localStorage.token
                 },
                 redirect: 'follow'
             };
@@ -35,6 +37,7 @@ export const ProjectCreateModalForm = () => {
             console.log(response);
 
             addProject(result);
+            dispatch(addProject(result))
         };
         sendData();
     }

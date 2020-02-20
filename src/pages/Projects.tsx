@@ -1,24 +1,30 @@
-import React, {useState, useEffect} from "react"
+import React, {useEffect} from "react"
 import {PageMenu} from "../components/PageMenu/PageMenu"
 import {ProjectTitles} from "../components/Projects/ProjectTitles"
 import {ProjectItem} from "../components/Projects/ProjectItem";
 import {Loader} from "../components/Loader";
+import {useSelector,useDispatch} from "react-redux";
+import {addProjects, setLoaderOn, setLoaderOff} from "../store/projects/actions";
+import {IProject} from "../interfaces";
 
 const axios = require('axios');
 axios.defaults.baseURL = 'https://geekhub-frontend-js-9.herokuapp.com';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
-export const Projects = (props:{data:any[], setData: any}) => {
-    const [isLoading, setIsLoading] = useState(false);
 
-    let countProjects: number = props.data.length;
+export const Projects = () => {
+    const projects = useSelector((state:any) => state.projects);
+    const loader = useSelector((state:any) => state.projects.loader);
+    const dispatch = useDispatch();
+
+
     useEffect( () => {
         const fetchData = async () => {
-            setIsLoading(true);
+            dispatch(setLoaderOn());
 
             let requestOptions:RequestInit = {
                 headers: {
-                    "x-access-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTE5YzIyM2E0MTk5YzAwMjI3NTI2OGEiLCJpYXQiOjE1Nzk2ODc4OTl9.M5q83O_nP6B8SbfNKOs3CaQTu4JaQcbr_MgDLSgqnTU"
+                    "x-access-token": localStorage.token
                 },
                 redirect: 'follow'
             };
@@ -26,24 +32,30 @@ export const Projects = (props:{data:any[], setData: any}) => {
             const response = await axios.get('/api/projects', requestOptions);
             const result = response.data;
 
-            console.log(response);
+            dispatch(addProjects(result));
 
-            props.setData(result.reverse());
-            setIsLoading(false);
+            dispatch(setLoaderOff());
         };
         fetchData();
-    },[]);
+    },[dispatch]);
+
+    let countProjects: number = 0;
+    if (projects.data.length !== undefined) {
+        countProjects = projects.data.length
+    } else {
+        countProjects = 0
+    }
 
     return (
             <section className="projects">
                 <PageMenu projects={countProjects}/>
                 <section className="projects-container">
                     <ProjectTitles/>
-                    {isLoading ? (
+                    {loader ? (
                         <Loader/>
                         ) :
                             <div className="projects-wrapper">
-                                {props.data.map((obj) => <ProjectItem key={obj._id} obj={obj}/>)}
+                                {projects.data.map((obj:IProject) => <ProjectItem key={obj._id} obj={obj}/>)}
                             </div>
                     }
                 </section>

@@ -1,11 +1,13 @@
-import React, {useContext} from "react";
+import React from "react";
 import {InputBlock} from "../Form/InputBlock";
 import {InputSubmit} from "../Form/InputSubmit";
 import {Formik} from "formik";
 import * as Yup from "yup";
 import {InputError} from "../Form/InputError";
-import {Context} from "../Context";
 import {loginToApp} from "../../scripts/login";
+import {useDispatch} from "react-redux";
+import {userLogin} from "../../store/auth/actions";
+
 const axios = require("axios");
 
 const validationSchema = Yup.object().shape({
@@ -19,7 +21,9 @@ const validationSchema = Yup.object().shape({
 });
 
 export const LoginForm = () => {
-    const {addNewUser} = useContext(Context);
+    /*const {addNewUser} = useContext(Context);*/
+    const dispatch = useDispatch();
+
     return (
         <Formik
             validationSchema={validationSchema}
@@ -38,9 +42,8 @@ export const LoginForm = () => {
                         };
 
                         let response = await axios.get("/api/users/", requestOptions);
-
-                        addNewUser(response.data._id);
-
+                        dispatch(userLogin(response.data._id));
+                        /*addNewUser(response.data._id);*/
                     }
                 )
         }}>
