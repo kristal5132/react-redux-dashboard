@@ -2,20 +2,24 @@ import React from "react"
 import {PageMenuLink} from "./PageMenuLink";
 import {PageMenuFilter} from "./PageMenuFilter";
 
-export const PageMenu = (props:{projects:number}) => {
+export const MessagesMenu = () => {
     const objMenuItems = [
         {
-            text: `All Projects (${props.projects})`,
+            text: `Inbox`,
             href: "#"
         },
         {
-            text: `Workflow`,
+            text: `Sent`,
+            href: "#"
+        },
+        {
+            text: `Trash`,
             href: "#"
         }
     ];
 
-    const menuFilterText:string = "Show projects";
-    const menuFilterOptions:string[] = ["Select filter", "All", "Active", "Disabled"];
+    const menuFilterText:string = "Filter messages";
+    const menuFilterOptions:string[] = ["Select filter", "Date", "Necessary", "Pointer"];
 
     return (
         <section className="page-menu">

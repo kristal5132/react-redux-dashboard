@@ -7,37 +7,36 @@ import messagesImg from "../../assets/images/sidebar/messages.png"
 import accountMultipleImg from "../../assets/images/sidebar/account-multiple.png"
 
 
+
 export const Sidebar:React.FC = () => {
+
     const sidebarNavElements = [
         {
-            id: "1",
-            link: "#",
+            link: "/home",
             src: homeImg
         },
         {
-            id: "2",
-            link: "#",
+            link: "/",
             src: menuImg
         },
         {
-            id: "3",
-            link: "#",
+            link: "/stats",
             src: trendingUpImg
         },
         {
-            id: "4",
-            link: "#",
+            link: "/messages",
             src: messagesImg
         },
         {
-            id: "5",
-            link: "#",
+            link: "/account",
             src: accountMultipleImg
         }
     ];
     return (
         <nav className="sidebar-nav">
-            {sidebarNavElements.map(obj => <SidebarElement key={obj.id} href={obj.link} src={obj.src}/>)}
+            {sidebarNavElements.map((obj, index) =>
+                <SidebarElement key={index} href={obj.link} src={obj.src} id={index}/>
+            )}
         </nav>
     )
 };

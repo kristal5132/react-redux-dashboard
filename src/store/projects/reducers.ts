@@ -1,4 +1,4 @@
-import {PROJECT_ADD, PROJECTS_ADD} from "./actions"
+import {PROJECT_ADD, PROJECTS_ADD, PROJECTS_REMOVE} from "./actions"
 import {LOADER_OFF, LOADER_ON} from "./actions";
 
 const defaultState:any = {
@@ -12,6 +12,11 @@ export const projects = (state = defaultState, action:{type:string, payload: any
             return {
                 ...state,
                 data: [...state.data, ...action.payload]
+            };
+        case PROJECTS_REMOVE:
+            return {
+                ...state,
+                data: []
             };
         case PROJECT_ADD:
             return {
@@ -30,6 +35,7 @@ export const projects = (state = defaultState, action:{type:string, payload: any
                 loader: false
             }
         }
+
         default: return state
     }
 };

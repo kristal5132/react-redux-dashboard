@@ -2,6 +2,8 @@ export const PROJECTS_ADD:string = "PROJECTS_ADD";
 export const PROJECT_ADD:string = "PROJECT_ADD";
 
 export const LOADER_ON:string = "LOADER_ON";
+export const PROJECTS_REMOVE:string = "PROJECTS_REMOVE";
+
 export const LOADER_OFF:string = "LOADER_OFF";
 
 export const addProjects:any = (projects:object[]) => {
@@ -29,3 +31,10 @@ export const setLoaderOff = () => {
         type: LOADER_OFF
     }
 };
+
+export const removeProjects = () => {
+    return {
+        type: PROJECTS_REMOVE
+    }
+}
+

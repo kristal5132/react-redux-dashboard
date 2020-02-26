@@ -7,6 +7,7 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {ResetPassword} from "./pages/ResetPassword";
 import {Projects} from "./pages/Projects";
 import {useSelector} from "react-redux";
+import {Messages} from "./pages/Messages";
 
 
 const App:React.FC = () => {
@@ -22,7 +23,12 @@ const App:React.FC = () => {
                     </section> : null}
 
                     {/*pages*/}
-                    {user ? <Projects/>:
+                    {user ?
+                        <Switch>
+                            <Route component={Projects} path="/" exact/>
+                            <Route component={Messages} path="/messages"/>
+                        </Switch>
+                        :
                         <Switch>
                             <Route component={Login} path="/" exact/>
                             <Route component={SignUp} path="/signup"/>
