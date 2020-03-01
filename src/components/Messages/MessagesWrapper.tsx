@@ -1,15 +1,17 @@
 import React from "react";
 import {MessagesThreads} from "./MessagesThreads";
-import {MessagesChat} from "./MessagesChat";
+import {MessagesChatWrapper} from "./MessagesChatWrapper";
 import {MessagesSenderInfo} from "./MessagesSenderInfo";
+import {useSelector} from "react-redux";
 
 export const MessagesWrapper = () => {
+    const threadId = useSelector((state:any) => state.messages.threadId);
     return (
         <>
             <section className="messages-wrapper">
                 <MessagesThreads/>
-                <MessagesChat/>
-                <MessagesSenderInfo/>
+                <MessagesChatWrapper/>
+                {threadId ? <MessagesSenderInfo/>: null}
             </section>
         </>
     )

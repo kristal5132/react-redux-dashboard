@@ -1,0 +1,45 @@
+.modal-users {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 95%;
+  border: 1px solid white;
+  height: 50%;
+  border-radius: 15px;
+  border-right: none;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+.modal-users__item {
+  width: 100%;
+  border-radius: 15px;
+  padding: 20px;
+  margin: 20px;
+  text-align: center;
+  max-width: 270px;
+  color: white;
+  transition: 0.2s;
+}
+
+.modal-users__item:hover,
+.modal-users__item_active {
+  transform: scale(1.03);
+  background-color: white;
+  color: black;
+}
+
+.modal-users__avatar {
+  width: 50%;
+  height: auto;
+}
+
+.modal-users__name {
+  overflow-wrap: break-word;
+}
+

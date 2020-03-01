@@ -1,15 +1,14 @@
 import React from "react";
 import userImg from "../../assets/images/users-avatar/photo-3.png"
 import {IThread} from "../../interfaces";
+import {useDispatch, useSelector} from "react-redux";
+import {addThreadId} from "../../store/messages/actions";
+
+export const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',	'November', 'December'];
 
 export const MessagesThread = (props:{data:IThread}) => {
-    let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',	'November', 'December'];
-    /*let senderName;
-    props.users.map((obj:any) => {
-        if (obj.name === localStorage.currentUser) {
-            senderName = obj.name;
-        }
-    });*/
+    const threadId = useSelector((state:any) => state.messages.threadId);
+    const dispatch = useDispatch();
     const senderName = props.data.users.map(function(obj) {
         let senderName;
         if (obj._id !== localStorage.currentUser) {
@@ -22,7 +21,7 @@ export const MessagesThread = (props:{data:IThread}) => {
     const newDate = newSplitString.getDate() + " " + months[newSplitString.getMonth()];
 
     return (
-        <div className="messages-user">
+        <div className={threadId === props.data._id ? "messages-user messages-user_active" : "messages-user "} onClick={() => dispatch(addThreadId(props.data._id))}>
             <div className="messages-user__wrapper">
                 <img className="messages-user__avatar" src={userImg} alt="Virtus User Avatar"/>
                 <h2 className="messages-user__name">{senderName}</h2>

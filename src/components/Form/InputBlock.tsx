@@ -6,8 +6,8 @@ interface InputBlockProps {
     id: string,
     label:string,
     value: string
-    onChange: any,
-    onBlur: any,
+    onChange?: any,
+    onBlur?: any,
     className: string
 }
 

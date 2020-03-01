@@ -1,4 +1,4 @@
-.project-modal {
+.modal {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -22,7 +22,8 @@
 //custom close
 .close-wrapper {
   position: absolute;
-  right: 0
+  right: 0;
+  margin: 15px;
 }
 $button-size: 40px;
 $close-width: ($button-size / 10);
@@ -123,7 +124,7 @@ $close-width: ($button-size / 10);
 .modal-body__title {
   text-align: center;
   color:white;
-  margin-top: 100px;
+  margin-top: 75px;
 }
 
 .project-form {

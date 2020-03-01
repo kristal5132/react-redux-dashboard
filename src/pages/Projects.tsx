@@ -4,7 +4,7 @@ import {ProjectTitles} from "../components/Projects/ProjectTitles"
 import {ProjectItem} from "../components/Projects/ProjectItem";
 import {Loader} from "../components/Loader";
 import {useSelector,useDispatch} from "react-redux";
-import {addProjects, setLoaderOn, setLoaderOff, removeProjects} from "../store/projects/actions";
+import {addProjects, setLoaderOn, setLoaderOff} from "../store/projects/actions";
 import {IProject} from "../interfaces";
 
 const axios = require('axios');
@@ -33,17 +33,18 @@ export const Projects = () => {
             const response = await axios.get('/api/projects', requestOptions);
             const result = response.data;
 
-
-            dispatch(addProjects(result));
+            if (projects.data.length === 0) {
+                dispatch(addProjects(result));
+            }
 
             dispatch(setLoaderOff());
         };
         fetchData();
 
-        return () => {
+        /*return () => {
             dispatch(removeProjects());
-        }
-    },[dispatch]);
+        }*/
+    },[dispatch, projects.data.length]);
 
     let countProjects: number = 0;
     if (projects.data.length !== undefined) {

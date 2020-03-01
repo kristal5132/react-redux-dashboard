@@ -36,5 +36,5 @@ export const removeProjects = () => {
     return {
         type: PROJECTS_REMOVE
     }
-}
+};
 

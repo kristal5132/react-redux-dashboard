@@ -33,3 +33,14 @@ export interface IThread {
         body: string
     }
 }
+
+export interface IMessage {
+    _id: string,
+    user: {
+        _id: string,
+        name: string
+    },
+    thread: string,
+    body: string,
+    created_at: string
+}

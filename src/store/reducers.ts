@@ -4,12 +4,14 @@ import {user} from "./auth/reducers";
 import {USER_LOGOUT} from "./auth/actions";
 import {projectModal} from "./addProjectToggler/reducers";
 import {messages} from "./messages/reducers";
+import {users} from "./users/reducers";
 
 const appReducer = combineReducers({
     projects,
     user,
     projectModal,
-    messages
+    messages,
+    users
 });
 
 export const rootReducer = (state:any, action:any) => {
