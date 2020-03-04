@@ -1,6 +1,7 @@
 import React from "react"
 import {PageMenuLink} from "./PageMenuLink";
 import {PageMenuFilter} from "./PageMenuFilter";
+import {ValueType} from "react-select";
 
 export const MessagesMenu = () => {
     const objMenuItems = [
@@ -19,7 +20,14 @@ export const MessagesMenu = () => {
     ];
 
     const menuFilterText:string = "Filter messages";
-    const menuFilterOptions:string[] = ["Select filter", "Date", "Necessary", "Pointer"];
+    const menuFilterOptions:object[] = [
+        { value: 'date', label: 'Date' },
+        { value: 'necessary', label: 'Necessary' },
+        { value: 'pointer', label: 'Pointer' }
+    ];
+
+    const onChange = (value:ValueType<any>) => console.log(value);
+
 
     return (
         <section className="page-menu">
@@ -31,7 +39,7 @@ export const MessagesMenu = () => {
                 })}
             </div>
             <div className="page-filter">
-                <PageMenuFilter key={menuFilterText} text={menuFilterText} value={menuFilterOptions}/>
+                <PageMenuFilter key={menuFilterText} text={menuFilterText} value={menuFilterOptions} onChange={onChange}/>
             </div>
         </section>
     )

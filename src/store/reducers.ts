@@ -5,13 +5,15 @@ import {USER_LOGOUT} from "./auth/actions";
 import {projectModal} from "./addProjectToggler/reducers";
 import {messages} from "./messages/reducers";
 import {users} from "./users/reducers";
+import {filters} from "./filter/reducers";
 
 const appReducer = combineReducers({
     projects,
     user,
     projectModal,
     messages,
-    users
+    users,
+    filters
 });
 
 export const rootReducer = (state:any, action:any) => {

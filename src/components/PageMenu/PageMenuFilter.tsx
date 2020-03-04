@@ -1,26 +1,20 @@
 import React from "react"
-import {Filter} from "../Filter";
+import Select from 'react-select'
 
 interface objMenuFilterTypes {
     text: string,
-    value: string[]
+    value: object[],
+    onChange: any
 }
 export const PageMenuFilter = (props:objMenuFilterTypes) => {
-
     return (
         <>
             <p className="page-filter__text">
                 {props.text}
             </p>
             <div className="custom-select">
-                <select>
-                    {props.value.map(item => {
-                        return (
-                            <Filter key={item} value={item}/>
-                        )
-                    })}
-                </select>
+                <Select options={props.value} onChange={props.onChange} />
             </div>
         </>
     )
-}
+};

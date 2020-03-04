@@ -6,6 +6,12 @@ import {Loader} from "../components/Loader";
 import {useSelector,useDispatch} from "react-redux";
 import {addProjects, setLoaderOn, setLoaderOff} from "../store/projects/actions";
 import {IProject} from "../interfaces";
+import {
+    projectsFilterInComplete,
+    projectsFilterInDevelopment,
+    projectsFilterInQueued,
+    projectsFilterInTesting, projectsFilterShowAll
+} from "../store/filter/actions";
 
 const axios = require('axios');
 axios.defaults.baseURL = 'https://geekhub-frontend-js-9.herokuapp.com';
@@ -16,6 +22,8 @@ export const Projects = () => {
     //TODO: add possibility to remove project, change it on button
     const projects = useSelector((state:any) => state.projects);
     const loader = useSelector((state:any) => state.projects.loader);
+    const filterValue = useSelector((state:any) => state.filters.projectFilter);
+    const filteredProjects = useSelector((state:any) => state.projects.filteredData);
     const dispatch = useDispatch();
 
 
@@ -41,10 +49,25 @@ export const Projects = () => {
         };
         fetchData();
 
-        /*return () => {
-            dispatch(removeProjects());
-        }*/
-    },[dispatch, projects.data.length]);
+        if (filterValue) {
+            if (filterValue.value === "completed") {
+                dispatch(projectsFilterInComplete())
+            }
+            if (filterValue.value === "queued") {
+                dispatch(projectsFilterInQueued())
+            }
+            if (filterValue.value === "testing") {
+                dispatch(projectsFilterInTesting())
+            }
+            if (filterValue.value === "development") {
+                dispatch(projectsFilterInDevelopment())
+            }
+            if (filterValue.value === "all") {
+                dispatch(projectsFilterShowAll())
+            }
+        }
+
+    },[dispatch, projects.data.length, filterValue]);
 
     let countProjects: number = 0;
     if (projects.data.length !== undefined) {
@@ -62,7 +85,8 @@ export const Projects = () => {
                         <Loader/>
                         ) :
                             <div className="projects-wrapper">
-                                {projects.data.map((obj:IProject) => <ProjectItem key={obj._id} obj={obj}/>)}
+                                {filterValue  ? filteredProjects.map((obj:IProject) => <ProjectItem key={obj._id} obj={obj}/>)
+                                    : projects.data.map((obj:IProject) => <ProjectItem key={obj._id} obj={obj}/>)}
                             </div>
                     }
                 </section>

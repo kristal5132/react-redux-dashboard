@@ -21,65 +21,65 @@ export const SEARCH_INPUT: string = "SEARCH_INPUT";
 export const ACTIVE_USER_IN_MODAL: string = "ACTIVE_USER_IN_MODAL";
 
 
-export const addThreads: any = (threads: object[]) => {
+export const addThreads: (threads:object[]) => {type:string, payload: object[]} = (threads) => {
     return {
         type: ADD_THREADS,
         payload: threads
     }
 };
 
-export const addNewThread:any = (thread: object) => {
+export const addNewThread:(thread:object) => {type:string, payload: object} = (thread) => {
     return {
         type: ADD_NEW_THREAD,
         payload: thread
     }
 };
 
-export const removeThreads:any = () => {
+export const removeThreads:() => {type:string} = () => {
     return {
         type: REMOVE_THREADS
     }
 };
 
 
-export const setThreadsLoaderOn: any = () => {
+export const setThreadsLoaderOn: () => {type:string} = () => {
     return {
         type: LOADER_ON_THREADS
     }
 };
 
-export const setThreadsLoaderOff: any = () => {
+export const setThreadsLoaderOff: () => {type:string} = () => {
     return {
         type: LOADER_OFF_THREADS
     }
 };
 
-export const setMessagesLoaderOn: any = () => {
+export const setMessagesLoaderOn: () => {type:string} = () => {
     return {
         type: LOADER_ON_MESSAGES
     }
 };
 
-export const setMessagesLoaderOff: any = () => {
+export const setMessagesLoaderOff: () => {type:string} = () => {
     return {
         type: LOADER_OFF_MESSAGES
     }
 };
 
-export const addMessages: any = (messages:object[]) => {
+export const addMessages: (messages:object[]) => {type: string, payload: object[]} = (messages) => {
     return {
         type: ADD_MESSAGES,
         payload: messages
     }
 };
 
-export const removeMessages: any = () => {
+export const removeMessages: () => {type:string} = () => {
     return {
         type: REMOVE_MESSAGES
     }
 };
 
-export const sendMessage: any = (message: IMessage) => {
+export const sendMessage: (message: IMessage) => {type:string, payload: IMessage} = (message) => {
     return {
         type: SEND_MESSAGE,
         payload: message
@@ -87,14 +87,14 @@ export const sendMessage: any = (message: IMessage) => {
 };
 
 
-export const addThreadId: any = (id:string) => {
+export const addThreadId: (id:string) => {type: string, payload:string} = (id) => {
     return {
         type: ADD_THREAD_ID,
         payload: id
     }
 };
 
-export const changeCurrentThreadMessage:any = (message: string, id: string, date: string) => {
+export const changeCurrentThreadMessage:(message: string, id: string, date: string) => {type: string, payload: string, date: string} = (message , id, date) => {
     return {
         type: CHANGE_CURRENT_THREAD_MESSAGE,
         payload: message,
@@ -103,7 +103,7 @@ export const changeCurrentThreadMessage:any = (message: string, id: string, date
     }
 };
 
-export const removeThreadId: any = () => {
+export const removeThreadId: () => {type: string} = () => {
     return {
         type: REMOVE_THREAD_ID
     }

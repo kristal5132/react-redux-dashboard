@@ -1,6 +1,9 @@
 import React from "react"
 import {PageMenuLink} from "./PageMenuLink";
 import {PageMenuFilter} from "./PageMenuFilter";
+import {ValueType} from "react-select";
+import {changeFilter} from "../../store/filter/actions";
+import {useDispatch} from "react-redux";
 
 export const PageMenu = (props:{projects:number}) => {
     const objMenuItems = [
@@ -15,7 +18,18 @@ export const PageMenu = (props:{projects:number}) => {
     ];
 
     const menuFilterText:string = "Show projects";
-    const menuFilterOptions:string[] = ["Select filter", "All", "Active", "Disabled"];
+    const menuFilterOptions:object[] = [
+        { value: 'all', label: 'All' },
+        { value: 'completed', label: 'Completed' },
+        { value: 'development', label: 'Development' },
+        { value: "queued", label: "Queued"},
+        { value: "testing", label: "Testing"}
+    ];
+
+    //TODO: add filter for messages later
+
+    const onChange = (value:ValueType<any>) => dispatch(changeFilter(value));
+    const dispatch = useDispatch();
 
     return (
         <section className="page-menu">
@@ -27,7 +41,7 @@ export const PageMenu = (props:{projects:number}) => {
                 })}
             </div>
             <div className="page-filter">
-                <PageMenuFilter key={menuFilterText} text={menuFilterText} value={menuFilterOptions}/>
+                <PageMenuFilter key={menuFilterText} text={menuFilterText} value={menuFilterOptions} onChange={onChange}/>
             </div>
         </section>
     )
