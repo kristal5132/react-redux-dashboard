@@ -1,12 +1,8 @@
 import React, {FormEvent, useState} from "react"
-import {useDispatch} from "react-redux";
-import {addProject} from "../../store/projects/actions";
-const axios = require('axios');
-axios.defaults.headers.post['Content-Type'] = 'application/json';
+import {InputBlock} from "../Form/InputBlock";
 
+export const ProjectCreateModalForm = (props: {sendData:any, submitValue: string}) => {
 
-export const ProjectCreateModalForm = () => {
-    const dispatch = useDispatch();
 
     const [title, setTitle] = useState("");
     const [company, setCompany] = useState("");
@@ -16,30 +12,7 @@ export const ProjectCreateModalForm = () => {
 
     function onSubmit(e:FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        const sendData = async () => {
-
-            let data = {
-                "title": title,
-                "company": company,
-                "cost": cost,
-                "deadline": deadline,
-                "assigned": assigned
-            };
-
-            let requestOptions: RequestInit = {
-                headers: {
-                    "x-access-token": localStorage.token
-                },
-                redirect: 'follow'
-            };
-            const response = await axios.post('/api/projects/', data, requestOptions);
-            const result = response.data;
-            console.log(response);
-
-            addProject(result);
-            dispatch(addProject(result))
-        };
-        sendData();
+        props.sendData(title, company, cost, deadline, assigned);
     }
 
 
@@ -70,7 +43,7 @@ export const ProjectCreateModalForm = () => {
                        value={assigned} onChange={e => setAssigned(e.target.value)}/>
                 <label htmlFor="modal-form__assigned" className="form__label">Assigned</label>
             </div>
-            <input type="submit" className="form__submit" value="Create project"/>
+            <input type="submit" className="form__submit" value={props.submitValue}/>
         </form>
     )
-}
+};

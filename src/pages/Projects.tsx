@@ -42,7 +42,7 @@ export const Projects = () => {
             const result = response.data;
 
             if (projects.data.length === 0) {
-                dispatch(addProjects(result));
+                dispatch(addProjects(result.reverse()));
             }
 
             dispatch(setLoaderOff());

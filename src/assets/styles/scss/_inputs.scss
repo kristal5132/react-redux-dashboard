@@ -81,3 +81,11 @@ $gray: #9b9b9b;
   color: red;
   font-size: 12px;
 }
+
+.form__field:-webkit-autofill,
+.form__field:-webkit-autofill:hover,
+.form__field:-webkit-autofill:focus,
+.form__field:-webkit-autofill:active  {
+  -webkit-box-shadow: 0 0 0 30px #2F3242 inset !important;
+  -webkit-text-fill-color: white !important;
+}

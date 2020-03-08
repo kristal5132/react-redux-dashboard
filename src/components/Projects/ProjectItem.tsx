@@ -2,8 +2,12 @@ import React from "react"
 import {ProjectItemText} from "./ProjectItemText";
 import {ProjectItemProgressBar} from "./ProjectItemProgressBar";
 import {ProjectItemOptions} from "./ProjectItemOptions";
+import {useSelector} from "react-redux";
+import {ProjectOptionsModal} from "./ProjectOptionsModal";
 
 export const ProjectItem = (props:any) => {
+    const isOpenModal = useSelector((state:any) => state.projects.isOpenProjectsOptions);
+    const selectedProject = useSelector((state:any) => state.projects.selectedProject);
     let months:string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',	'November', 'December'];
 
     let newDate:string | undefined;
@@ -21,9 +25,7 @@ export const ProjectItem = (props:any) => {
     } else cost = props.obj.cost;
 
     return (
-        <div className="project-container" onClick={() => {
-            console.log(props.obj._id)
-        }}>
+        <div className="project-container">
                 <ProjectItemText title={props.obj.title} subtitle={props.obj.company}/>
                 <ProjectItemText title={cost}/>
                 <ProjectItemText title={newDate} subtitle={`${daysToDeadline} days left`}/>
@@ -36,7 +38,8 @@ export const ProjectItem = (props:any) => {
                 {props.obj.assigned !== null &&
                     <ProjectItemText title={props.obj.assigned.name} subtitle={props.obj.assigned.position}/>
                 }
-                <ProjectItemOptions/>
+                <ProjectItemOptions id={props.obj._id}/>
+                {isOpenModal && selectedProject === props.obj._id ? <ProjectOptionsModal/>: null}
         </div>
     )
 };
